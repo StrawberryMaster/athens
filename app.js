@@ -32,6 +32,30 @@
     "Markers"
   ]);
 
+  const DEFAULT_PIN_ICON = "star";
+  const PIN_ICONS = [
+    { id: "redflag", label: "Landmark / flag" },
+    { id: "greenflag", label: "Town / city" },
+    { id: "star", label: "Star" },
+    { id: "temple", label: "Temple" },
+    { id: "tower", label: "Tower" },
+    { id: "building", label: "Building" },
+    { id: "compass", label: "Compass" },
+    { id: "minecart", label: "Mine" },
+    { id: "tree", label: "Tree" },
+    { id: "flower", label: "Flower" },
+    { id: "sign", label: "Sign" },
+    { id: "gear", label: "Gear" },
+    { id: "exclamation", label: "Point of interest" },
+    { id: "world", label: "Spawn / world" }
+  ];
+  const PIN_ICON_IDS = new Set(PIN_ICONS.map(icon => icon.id));
+  const CLOCK_EXPANDED_KEY = "athens_clock_expanded_v1";
+
+  function iconUrlFor(name) {
+    return `data/icons/${encodeURIComponent(PIN_ICON_IDS.has(name) ? name : DEFAULT_PIN_ICON)}.png`;
+  }
+
   async function loadJSON(path, fallback) {
     try {
       const res = await fetch(path);
@@ -339,6 +363,21 @@
     }
   });
 
+  function findSpawnMarker() {
+    const sets = state.markersJson?.sets || {};
+    for (const mset of Object.values(sets)) {
+      const spawn = mset?.markers?._spawn_world;
+      if (spawn && Number.isFinite(spawn.x) && Number.isFinite(spawn.z)) return spawn;
+    }
+    for (const mset of Object.values(sets)) {
+      for (const m of Object.values(mset?.markers || {})) {
+        if (!m || !Number.isFinite(m.x) || !Number.isFinite(m.z)) continue;
+        if (String(m.label || "").trim().toLowerCase() === "spawn") return m;
+      }
+    }
+    return null;
+  }
+
   function loadMapLayer(resetCenter = true) {
     if (state.tileLayer) map.removeLayer(state.tileLayer);
     const m = state.activeMeta;
@@ -362,14 +401,20 @@
       `${state.world.title || state.world.name} • ${state.mapCfg.title || state.mapCfg.name}`;
 
     if (resetCenter) {
-      const wb = state.extractedMapData?.source_canvas?.world_bounds;
-      if (wb) {
-        map.fitBounds(L.latLngBounds(
-          extractedWorldToLatLng(wb[0], wb[1]),
-          extractedWorldToLatLng(wb[2], wb[3])
-        ));
+      const spawn = findSpawnMarker();
+      if (spawn) {
+        const spawnLatLng = worldToLatLng(spawn.x, spawn.y ?? 64, spawn.z);
+        map.setView(spawnLatLng, Math.min(1, m.max_level));
       } else {
-        map.fitBounds(bounds);
+        const wb = state.extractedMapData?.source_canvas?.world_bounds;
+        if (wb) {
+          map.fitBounds(L.latLngBounds(
+            extractedWorldToLatLng(wb[0], wb[1]),
+            extractedWorldToLatLng(wb[2], wb[3])
+          ));
+        } else {
+          map.fitBounds(bounds);
+        }
       }
     }
     buildMapStyleMenu();
@@ -703,18 +748,24 @@
 
     for (const p of worldCustom) {
       const ll = worldToLatLng(p.x, p.y || 64, p.z);
-      const pinIcon = L.divIcon({ className: "athens-custom-pin", iconSize: [14, 14], iconAnchor: [7, 7] });
+      const iconUrl = iconUrlFor(p.icon);
+      const pinIcon = L.divIcon({
+        className: "athens-custom-pin",
+        html: `<img class="athens-custom-pin-img" src="${iconUrl}" alt="" onerror="this.style.display='none'" />`,
+        iconSize: [22, 22],
+        iconAnchor: [11, 11]
+      });
       const marker = L.marker(ll, { icon: pinIcon }).addTo(customGroup);
       marker.bindTooltip(`${p.name} (Custom)`);
-      const groupLabel = p.district || "Custom Athens Pins";
       const item = {
         uid: `custom:${p.id}`,
         layerId: "__custom__",
         name: p.name,
-        groupLabel,
-        _search: `${p.name}\0${groupLabel}`.toLowerCase(),
+        groupLabel: "",
+        _search: `${p.name}\0custom pin`.toLowerCase(),
         x: p.x,
         z: p.z,
+        iconUrl,
         color: "#ac4900",
         customPin: p,
         rawDesc: "",
@@ -823,11 +874,14 @@
       const visual = item.iconUrl
         ? `<img class="place-ico" src="${item.iconUrl}" alt="" loading="lazy" onerror="this.style.display='none'" />`
         : `<span class="place-ico-dot" style="background:${item.color || "#3f70b5"}"></span>`;
+      const metaParts = [];
+      if (item.groupLabel) metaParts.push(escapeHtml(item.groupLabel));
+      metaParts.push(`${item.x}, ${item.z}`);
 
       li.innerHTML = `${visual}
         <div>
           <div class="place-title">${escapeHtml(item.name)}</div>
-          <div class="place-meta">${escapeHtml(item.groupLabel)} • ${item.x}, ${item.z}</div>
+          <div class="place-meta">${metaParts.join(" • ")}</div>
         </div>`;
       li.onclick = () => {
         item.focus();
@@ -853,9 +907,12 @@
     if (item.safeDesc == null) {
       item.safeDesc = sanitizeHtml(item.rawDesc);
     }
+    const metaParts = [];
+    if (item.groupLabel) metaParts.push(escapeHtml(item.groupLabel));
+    metaParts.push(`X ${item.x}, Z ${item.z}`);
     document.getElementById("plex-inspector").innerHTML = `
       <strong>${escapeHtml(item.name)}</strong><br/>
-      <span>${escapeHtml(item.groupLabel)} • X ${item.x}, Z ${item.z}</span>
+      <span>${metaParts.join(" • ")}</span>
       <div style="margin-top:6px">${item.safeDesc || "No description provided."}</div>
       ${item.customPin ? `<button id="btn-inspect-edit" class="hdr-btn" style="margin-top:8px">Edit Pin</button>` : ""}
     `;
@@ -903,19 +960,44 @@
     }
     if (state.editMode) {
       openPinModal({
-        id: "", name: "", district: "Athens Proper", category: "landmark",
+        id: "", name: "", icon: DEFAULT_PIN_ICON,
         world: state.world.name, x: w.x, y: 64, z: w.z, description: ""
       });
     }
   });
 
   // pin editor
+  const iconPickerEl = document.getElementById("pin-icon-picker");
+  const pinIconInput = document.getElementById("pin-icon");
+  for (const icon of PIN_ICONS) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "icon-choice";
+    btn.dataset.icon = icon.id;
+    btn.title = icon.label;
+    btn.setAttribute("role", "radio");
+    btn.setAttribute("aria-label", icon.label);
+    btn.innerHTML = `<img src="${iconUrlFor(icon.id)}" alt="" />`;
+    btn.onclick = () => setPinIcon(icon.id);
+    iconPickerEl.appendChild(btn);
+  }
+  setPinIcon(DEFAULT_PIN_ICON);
+
+  function setPinIcon(name) {
+    const selected = PIN_ICON_IDS.has(name) ? name : DEFAULT_PIN_ICON;
+    pinIconInput.value = selected;
+    for (const btn of iconPickerEl.querySelectorAll(".icon-choice")) {
+      const active = btn.dataset.icon === selected;
+      btn.classList.toggle("selected", active);
+      btn.setAttribute("aria-checked", active ? "true" : "false");
+    }
+  }
+
   function openPinModal(pin) {
     document.getElementById("pin-modal-title").textContent = pin.id ? "Edit Custom pin" : "Add custom pin";
     document.getElementById("pin-id").value = pin.id || "";
     document.getElementById("pin-name").value = pin.name || "";
-    document.getElementById("pin-district").value = pin.district || "Athens Proper";
-    document.getElementById("pin-category").value = pin.category || "landmark";
+    setPinIcon(pin.icon);
     document.getElementById("pin-x").value = pin.x ?? 0;
     document.getElementById("pin-z").value = pin.z ?? 0;
     document.getElementById("pin-desc").value = pin.description || "";
@@ -927,18 +1009,19 @@
   document.getElementById("pin-form").onsubmit = (ev) => {
     ev.preventDefault();
     const existingId = document.getElementById("pin-id").value;
+    const existing = existingId ? state.places.find(p => p.id === existingId) : null;
     const item = {
+      ...(existing || {}),
       id: existingId || `pin_${Date.now()}`,
       name: document.getElementById("pin-name").value.trim(),
-      district: document.getElementById("pin-district").value.trim() || "Athens Proper",
-      category: document.getElementById("pin-category").value,
+      icon: pinIconInput.value,
       world: state.world.name,
       x: Number(document.getElementById("pin-x").value),
-      y: 64,
+      y: existing?.y ?? 64,
       z: Number(document.getElementById("pin-z").value),
       description: document.getElementById("pin-desc").value.trim()
     };
-    if (existingId) {
+    if (existing) {
       const idx = state.places.findIndex(p => p.id === existingId);
       if (idx >= 0) state.places[idx] = item;
     } else {
@@ -1019,6 +1102,24 @@
     setTimeout(() => map.invalidateSize(), 150);
   };
 
+  // clock card collapse
+  const clockCard = document.getElementById("clock-card");
+  const clockToggleBtn = document.getElementById("btn-clock-toggle");
+  function setClockExpanded(expanded, persist = false) {
+    clockCard.classList.toggle("collapsed", !expanded);
+    clockToggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+    clockToggleBtn.title = expanded ? "Minimize clock" : "Expand clock";
+    if (persist) {
+      try { localStorage.setItem(CLOCK_EXPANDED_KEY, expanded ? "1" : "0"); } catch { /* ignore */ }
+    }
+  }
+  try {
+    setClockExpanded(localStorage.getItem(CLOCK_EXPANDED_KEY) === "1");
+  } catch {
+    setClockExpanded(false);
+  }
+  clockToggleBtn.onclick = () => setClockExpanded(clockCard.classList.contains("collapsed"), true);
+
   // search + keyboard ergonomics
   let searchTimer = 0;
   document.getElementById("search-input").oninput = () => {
@@ -1064,7 +1165,9 @@
     const minKey = `${now.getHours()}:${now.getMinutes()}`;
     if (minKey !== lastMinuteKey) {
       lastMinuteKey = minKey;
-      document.getElementById("plex-time").textContent = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      const timeText = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      document.getElementById("plex-time").textContent = timeText;
+      document.getElementById("plex-time-compact").textContent = timeText;
       document.getElementById("plex-date").textContent = now.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
     }
     if (!clockCanvas) return;

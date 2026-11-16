@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Athens Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
   <div class="atlas-shell">
@@ -68,10 +68,17 @@
       </main>
 
       <aside class="plex-utility" id="plex-utility">
-        <div class="plex-card clock-card">
-          <canvas id="lh-analog-clock" width="128" height="128"></canvas>
-          <div class="plex-time" id="plex-time">12:00 PM</div>
-          <div class="plex-date" id="plex-date"></div>
+        <div class="plex-card clock-card collapsed" id="clock-card">
+          <button type="button" class="clock-toggle" id="btn-clock-toggle" aria-expanded="false" title="Expand clock">
+            <span class="clock-chevron" aria-hidden="true">&#9656;</span>
+            <span class="clock-toggle-label">Clock</span>
+            <span class="clock-inline-time" id="plex-time-compact">12:00 PM</span>
+          </button>
+          <div class="clock-body">
+            <canvas id="lh-analog-clock" width="128" height="128"></canvas>
+            <div class="plex-time" id="plex-time">12:00 PM</div>
+            <div class="plex-date" id="plex-date"></div>
+          </div>
         </div>
 
         <div class="plex-card telemetry-card">
@@ -100,15 +107,11 @@
       <form id="pin-form" class="clean-modal-body">
         <input type="hidden" id="pin-id" />
         <label>Name<input type="text" id="pin-name" required /></label>
-        <label>District / group<input type="text" id="pin-district" placeholder="e.g. Acropolis, Agora" /></label>
-        <label>Category
-          <select id="pin-category">
-            <option value="landmark">Landmark / Monument</option>
-            <option value="district">District / Quarter</option>
-            <option value="gate">Gate / Road</option>
-            <option value="civic">Civic / Agora</option>
-          </select>
-        </label>
+        <div class="form-field">
+          <span class="form-label">Icon</span>
+          <div id="pin-icon-picker" class="icon-picker" role="radiogroup" aria-label="Pin icon"></div>
+          <input type="hidden" id="pin-icon" value="star" />
+        </div>
         <div class="coord-pair">
           <label>X<input type="number" id="pin-x" step="1" required /></label>
           <label>Z<input type="number" id="pin-z" step="1" required /></label>
@@ -124,6 +127,6 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="app.js?v=12"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>
