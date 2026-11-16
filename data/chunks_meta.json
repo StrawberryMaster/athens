@@ -1,0 +1,21 @@
+{
+  "world_flat_day": {
+    "tile_px": 128,
+    "chunk_tiles": 16,
+    "chunk_px": 2048,
+    "target_zoom": 1,
+    "max_level": 3,
+    "ext": "webp",
+    "bounds_map": [
+      -45056,
+      -2793472,
+      2793472,
+      40960
+    ],
+    "single_image": null,
+    "world": "world",
+    "map": "flat",
+    "is_day": true,
+    "chunks_dir": "data/chunks/world_flat_day"
+  }
+}

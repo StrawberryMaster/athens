@@ -1,0 +1,123 @@
+{
+  "sets": {
+    "Incorporated_Cities": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "Incorporated_Cities",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "Cities_Lithuania": {
+      "hide": true,
+      "circles": {},
+      "areas": {},
+      "label": "Cities_Lithuania",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "Towns_Lithuania": {
+      "hide": true,
+      "circles": {},
+      "areas": {},
+      "label": "Towns_Lithuania",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "hidden": {
+      "hide": true,
+      "circles": {},
+      "areas": {},
+      "label": "hidden",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "Counties": {
+      "hide": true,
+      "circles": {},
+      "areas": {},
+      "label": "Counties",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "CityMarkers": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "CityMarkers",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "Airports": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "Airports",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "<markerset-label>": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "<markerset-label>",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "Solariano": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "Solariano",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "landmarks": {
+      "hide": true,
+      "circles": {},
+      "areas": {},
+      "label": "Landmarks",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    },
+    "markers": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "Markers",
+      "markers": {
+        "_spawn_world_nether": {
+          "markup": false,
+          "x": 32.0,
+          "icon": "world",
+          "y": 79.0,
+          "dim": "16x16",
+          "z": 256.0,
+          "label": "Spawn"
+        }
+      },
+      "lines": {},
+      "layerprio": 0
+    },
+    "feeshland": {
+      "hide": false,
+      "circles": {},
+      "areas": {},
+      "label": "feeshland",
+      "markers": {},
+      "lines": {},
+      "layerprio": 0
+    }
+  },
+  "timestamp": 1792317208920
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athens Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css?v=9" />
+</head>
+<body>
+  <div class="atlas-shell">
+    <header class="atlas-header">
+      <div class="brand-group">
+        <div class="brand-orb" aria-hidden="true">A</div>
+        <div>
+          <h1>The World of Athens</h1>
+          <div class="brand-sub" id="active-layer-label">City atlas</div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="search-pill">
+          <input id="search-input" type="text" placeholder="Search cities, districts, places..." autocomplete="off" />
+          <span class="search-icon">&#128269;</span>
+        </div>
+
+        <button class="hdr-btn" id="btn-reset-view" title="Fit Map">Reset view</button>
+        <div class="hdr-dropdown">
+          <button class="hdr-btn" id="btn-map-switch">Map style &#9662;</button>
+          <div class="hdr-menu" id="map-style-menu"></div>
+        </div>
+        <button class="hdr-btn" id="btn-edit-mode">Add / edit pins</button>
+        <button class="hdr-btn" id="btn-measure">Measure</button>
+        <button class="hdr-btn" id="btn-export-json">Export JSON</button>
+        <label class="hdr-btn" for="import-json-input">
+          Import JSON
+          <input id="import-json-input" type="file" accept=".json" hidden />
+        </label>
+        <button class="hdr-btn accent" id="btn-toggle-utility" title="Toggle Clock & inspector">Clock &amp; info</button>
+      </div>
+    </header>
+
+    <div class="atlas-main">
+      <aside class="atlas-sidebar">
+        <section class="panel-section">
+          <div class="panel-head olive">
+            <span>Map layers</span>
+            <span id="layer-count-badge" class="head-badge">0</span>
+          </div>
+          <div id="layers-list" class="layers-list"></div>
+        </section>
+
+        <section class="panel-section grow">
+          <div class="panel-head slate">
+            <span>Cities &amp; landmarks</span>
+            <span id="place-count-badge" class="head-badge">0</span>
+          </div>
+          <ul id="places-list" class="places-list"></ul>
+        </section>
+
+        <div id="edit-banner" class="edit-banner hidden">
+          <strong>Pin Mode active:</strong> click anywhere on the map to add a custom marker, or click a custom pin to edit/delete it.
+        </div>
+      </aside>
+
+      <main class="map-stage">
+        <div id="map"></div>
+      </main>
+
+      <aside class="plex-utility" id="plex-utility">
+        <div class="plex-card clock-card">
+          <canvas id="lh-analog-clock" width="128" height="128"></canvas>
+          <div class="plex-time" id="plex-time">12:00 PM</div>
+          <div class="plex-date" id="plex-date"></div>
+        </div>
+
+        <div class="plex-card telemetry-card">
+          <div class="card-title">Coordinates</div>
+          <div class="telemetry-row"><span>Cursor</span><strong id="plex-cursor">0, 0</strong></div>
+          <div class="telemetry-row"><span>Zoom</span><strong id="plex-zoom">0</strong></div>
+          <div id="measure-readout" class="telemetry-row hidden"><span>Distance</span><strong id="measure-val">0 m</strong></div>
+        </div>
+
+        <div class="plex-card inspector-card">
+          <div class="card-title">Selected location</div>
+          <div id="plex-inspector" class="inspector-body">
+            Click any city polygon, marker, or landmark to view its details.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="pin-modal" class="modal-backdrop hidden">
+    <div class="clean-modal">
+      <div class="clean-modal-head">
+        <span id="pin-modal-title">Edit custom pin</span>
+        <button class="modal-x" id="btn-close-pin">&times;</button>
+      </div>
+      <form id="pin-form" class="clean-modal-body">
+        <input type="hidden" id="pin-id" />
+        <label>Name<input type="text" id="pin-name" required /></label>
+        <label>District / group<input type="text" id="pin-district" placeholder="e.g. Acropolis, Agora" /></label>
+        <label>Category
+          <select id="pin-category">
+            <option value="landmark">Landmark / Monument</option>
+            <option value="district">District / Quarter</option>
+            <option value="gate">Gate / Road</option>
+            <option value="civic">Civic / Agora</option>
+          </select>
+        </label>
+        <div class="coord-pair">
+          <label>X<input type="number" id="pin-x" step="1" required /></label>
+          <label>Z<input type="number" id="pin-z" step="1" required /></label>
+        </div>
+        <label>Description<textarea id="pin-desc" rows="3"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary danger hidden" id="btn-delete-pin">Delete</button>
+          <button type="button" class="btn-secondary" id="btn-cancel-pin">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js?v=12"></script>
+</body>
+</html>
