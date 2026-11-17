@@ -1125,7 +1125,8 @@
     "y": 73.0,
     "z": 405.0,
     "description": "",
-    "icon": "greenflag"
+    "icon": "greenflag",
+    "article": "Nowhere"
   },
   {
     "id": "CityMarkers_marker_45",
@@ -1437,7 +1438,8 @@
     "y": 69.0,
     "z": 578.0,
     "description": "",
-    "icon": "redflag"
+    "icon": "redflag",
+    "article": "Blahville"
   },
   {
     "id": "markers_Fernost",

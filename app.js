@@ -6,6 +6,8 @@
     chunksMeta: null,
     extractedMapData: null,
     markersJson: null,
+    articles: {},
+    articlesByKey: new Map(),
     places: [],
     world: null,
     mapCfg: null,
@@ -72,16 +74,24 @@
   }
 
   // startup fetch
-  const [config, chunksMeta, extractedMapData, fetchedPlaces] = await Promise.all([
+  const [config, chunksMeta, extractedMapData, fetchedPlaces, wikiArticles] = await Promise.all([
     loadJSON("data/config.json", null),
     loadJSON("data/chunks_meta.json", {}),
     loadJSON("data/extracted_map_data.json?v=9", null),
-    loadJSON("data/athens_places.json", [])
+    loadJSON("data/athens_places.json", []),
+    loadJSON("data/wiki_articles.json", {})
   ]);
 
   state.config = config;
   state.chunksMeta = chunksMeta;
   state.extractedMapData = extractedMapData;
+  state.articles = wikiArticles || {};
+  for (const [key, article] of Object.entries(state.articles)) {
+    const keys = [key, article.title, ...(article.aliases || [])]
+      .filter(Boolean)
+      .map(s => String(s).trim().toLowerCase().replace(/^the\s+/, ""));
+    for (const k of keys) state.articlesByKey.set(k, article);
+  }
 
   // restore unsaved local pin edits if present
   try {
@@ -900,6 +910,32 @@
     list.appendChild(frag);
   }
 
+  function findArticleForItem(item) {
+    const explicit = item.customPin?.article || item.article;
+    if (explicit && state.articles[explicit]) {
+      return { key: explicit, article: state.articles[explicit] };
+    }
+    const key = String(item.name || "").trim().toLowerCase();
+    const article = state.articlesByKey.get(key);
+    return article ? { key, article } : null;
+  }
+
+  function renderArticleHtml(article) {
+    const facts = (article.facts || []).map(f =>
+      `<div class="wiki-fact"><dt>${escapeHtml(f.label)}</dt><dd>${escapeHtml(f.value)}</dd></div>`
+    ).join("");
+    const sections = (article.sections || []).map(s =>
+      `<h5 class="wiki-section-head">${escapeHtml(s.heading)}</h5>${sanitizeHtml(s.html || "")}`
+    ).join("");
+    const notes = (article.notes || []).map((n, i) =>
+      `<li>[note ${i + 1}] ${escapeHtml(n)}</li>`
+    ).join("");
+    return `
+      ${facts ? `<dl class="wiki-facts">${facts}</dl>` : ""}
+      ${sections}
+      ${notes ? `<ol class="wiki-notes">${notes}</ol>` : ""}`;
+  }
+
   function inspectItem(item) {
     if (state.selectedUid && state.selectedUid !== item.uid) {
       state.liByUid.get(state.selectedUid)?.classList.remove("selected");
@@ -917,14 +953,48 @@
     const metaParts = [];
     if (item.groupLabel) metaParts.push(escapeHtml(item.groupLabel));
     metaParts.push(`X ${item.x}, Z ${item.z}`);
+
+    const found = findArticleForItem(item);
+    const article = found?.article;
+    const articleHtml = article ? `
+      <section class="wiki-article" data-article-key="${escapeHtml(found.key)}">
+        <div class="wiki-article-head">
+          <span class="wiki-kicker">From the Athens Wiki</span>
+          <button type="button" class="wiki-toggle" id="btn-wiki-toggle" aria-expanded="false" aria-controls="wiki-article-body">
+            <span class="wiki-toggle-label">Read full article</span> <span class="wiki-chevron" aria-hidden="true">&#9662;</span>
+          </button>
+        </div>
+        <div class="wiki-lead">${sanitizeHtml(article.lead || "")}</div>
+        <div class="wiki-body hidden" id="wiki-article-body">${renderArticleHtml(article)}</div>
+        <div class="wiki-credit">
+          Text from <a href="${escapeHtml(article.source || "https://athensmc.fandom.com/")}" target="_blank" rel="noopener noreferrer">Athens Wiki</a>
+          &middot; <a href="https://www.fandom.com/licensing" target="_blank" rel="noopener noreferrer">CC-BY-SA</a>
+        </div>
+      </section>` : "";
+    const descHtml = (article && item.customPin && !item.customPin.description)
+      ? ""
+      : `<div class="inspector-desc">${item.safeDesc || "No description provided."}</div>`;
+
     document.getElementById("plex-inspector").innerHTML = `
       <strong>${escapeHtml(item.name)}</strong><br/>
       <span>${metaParts.join(" • ")}</span>
-      <div style="margin-top:6px">${item.safeDesc || "No description provided."}</div>
+      ${descHtml}
+      ${articleHtml}
       ${item.customPin ? `<button id="btn-inspect-edit" class="hdr-btn" style="margin-top:8px">Edit Pin</button>` : ""}
     `;
     const editBtn = document.getElementById("btn-inspect-edit");
     if (editBtn && item.customPin) editBtn.onclick = () => openPinModal(item.customPin);
+
+    const wikiToggle = document.getElementById("btn-wiki-toggle");
+    if (wikiToggle) {
+      wikiToggle.onclick = () => {
+        const body = document.getElementById("wiki-article-body");
+        if (!body) return;
+        const expanded = body.classList.toggle("hidden") === false;
+        wikiToggle.setAttribute("aria-expanded", String(expanded));
+        wikiToggle.querySelector(".wiki-toggle-label").textContent = expanded ? "Show less" : "Read full article";
+      };
+    }
   }
 
   // cursor telemetry

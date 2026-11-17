@@ -1,0 +1,242 @@
+{
+  "Athens (City)": {
+    "title": "Athens (City)",
+    "aliases": ["Athens", "Athens City"],
+    "lead": "<p><strong>Athens</strong> (also known as <strong>Athens City</strong>) is the co-capital and second-most populous city of the <a href=\"https://athensmc.fandom.com/wiki/Athens_Federation\" target=\"_blank\" rel=\"noopener noreferrer\">Athens Federation</a>. With an estimated population of more than 2.5 million people, it is known for its iconic <a href=\"https://athensmc.fandom.com/wiki/Skyscraper_Row\" target=\"_blank\" rel=\"noopener noreferrer\">Skyscraper Row</a>.</p>",
+    "facts": [
+      { "label": "Also known as", "value": "Athens City" },
+      { "label": "Status", "value": "Co-capital of the Athens Federation" },
+      { "label": "Population", "value": "More than 2.5 million (estimated)" },
+      { "label": "Known for", "value": "Skyscraper Row" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>In 1453, a large ship known as the <em>Joaninha</em> carrying a crew of approximately 100 people crashed on a small island.</p><p>Construction of the iconic Skyscraper Row did not begin until the late 1800s.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Athens_%28City%29"
+  },
+  "Blahville": {
+    "title": "Blahville",
+    "aliases": ["Blahville, Athens"],
+    "lead": "<p><strong>Blahville</strong> is a <em>de jure</em> neighborhood<sup title=\"de facto a town\">[note 1]</sup> of <a href=\"https://athensmc.fandom.com/wiki/Athens_%28City%29\" target=\"_blank\" rel=\"noopener noreferrer\">Athens City</a>, located in the border of <a href=\"https://athensmc.fandom.com/wiki/Athens_County\" target=\"_blank\" rel=\"noopener noreferrer\">Athens County</a> and <a href=\"https://athensmc.fandom.com/wiki/Milton_County\" target=\"_blank\" rel=\"noopener noreferrer\">Milton County</a>, with the majority of its residents residing in the former. Blahville has a population of 12,394 people as of 2021 and is mostly made up of medium-sized, two-story wooden houses with a few local commercial buildings. Along with an unused airport, the town has a helipad. Blahville is the only town in the <a href=\"https://athensmc.fandom.com/wiki/Athens_Federation\" target=\"_blank\" rel=\"noopener noreferrer\">Athens Federation</a> that is entirely solar-powered, making it the federation's first sustainable community. Blahville is also known for being the hometown of Milton McKeglerton, an Athens celebrity.</p><p>Despite having an elected mayor and operating as a town, the city is currently classified as an unincorporated city of Athens, which local residents want to change.</p>",
+    "facts": [
+      { "label": "Type", "value": "Neighborhood of Athens City (de facto a town); unincorporated" },
+      { "label": "Counties", "value": "Athens County (majority), Milton County" },
+      { "label": "Population", "value": "12,394 (2021)" },
+      { "label": "Founded", "value": "1997 by R. D. Foamix" },
+      { "label": "Energy", "value": "Entirely solar-powered" },
+      { "label": "Known for", "value": "Helipad, abandoned airport, Milton McKeglerton" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>Blahville was founded in 1997 by R. D. Foamix, a member of the prestigious Foamix family, who was dissatisfied with the bland, gray buildings of Athens' suburbs and spent over $5 million of his own money to build an exurb of Athens called Blahville. This was established in a deal with <a href=\"https://athensmc.fandom.com/wiki/Athens_%28City%29\" target=\"_blank\" rel=\"noopener noreferrer\">Athens City</a> mayor Opiata Mazat (ACP), who agreed to lease the southern portion of the city to Foamix for 20 years. The following year, Foamix spent some of his money on a small airport, which was eventually abandoned and replaced with a small helipad. The existing structures were destroyed by a small earthquake in 2001, with only the ruins of a small terminal and a hangar remaining.</p><p>By the late 2000s, Blahville turned into a fully solar-powered, environmentally-friendly neighborhood, the first of the federation. This resulted in high amounts of subsidies being given to the neighborhood from the city, which helped its development. However, an investigation started by the Athens Court revealed that, during a town revitalization in 2015, which resulted in the abandonment of the previous andesite/diorite/granite standard in favor of something more modern, two-thirds of the subsidies went to Foamix family members, and not the city. This resulted in the subsidies being cut, and in 2018, Athens City Mayor Joanna Beatrice-Taylor (ASP) decided to not renew the 20-year lease upon its expiration, with the goal of regaining full control of Blahville. J. D. Foamix, the then-head of the family, disapproved of her decision and attempted to assassinate Beatrice-Taylor and her security guard, Hubert Farnsworth; this failed and Foamix was caught and convicted in 2019 of racketeering, bribery, kickbacks, corruption, attempted murder, and assault with a deadly weapon.</p><p>Despite this, there has been no change in the control of the city; it has an elected mayor (unrecognized by Athens City) and also a 7-member city council, composed of Foamix family members.</p>"
+      }
+    ],
+    "notes": ["de facto a town"],
+    "source": "https://athensmc.fandom.com/wiki/Blahville"
+  },
+  "Cherkasy": {
+    "title": "Cherkasy",
+    "aliases": ["City and Incorporated Settlement of Cherkasy"],
+    "lead": "<p><strong>Cherkasy</strong>, officially the <strong>City and Incorporated Settlement of Cherkasy</strong>, is an Athens city-district located north of Athens and west of Pripyat. The city was founded late on 04/12/2019. As of 01/14/21, the city features 9 individual buildings, including the large Roy Office Building. Cherkasy is known for its distinctive red road lines and heavy snow year-round.</p>",
+    "facts": [
+      { "label": "Official name", "value": "City and Incorporated Settlement of Cherkasy" },
+      { "label": "Type", "value": "Athens city-district" },
+      { "label": "Location", "value": "North of Athens, west of Pripyat" },
+      { "label": "Founded", "value": "04/12/2019" },
+      { "label": "Buildings", "value": "9 as of 01/14/21, including the Roy Office Building" },
+      { "label": "Known for", "value": "Red road lines, heavy snow year-round" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Cherkasy"
+  },
+  "Delgato": {
+    "title": "Delgato",
+    "aliases": ["Autonomous District of Delgato"],
+    "lead": "<p><strong>Delgato</strong>, officially the <em>Autonomous District of Delgato</em>, is one of the districts of <a href=\"https://athensmc.fandom.com/wiki/Novo-Arkhangelsk\" target=\"_blank\" rel=\"noopener noreferrer\">Novo-Arkhangelsk</a>. As of the 2021 census, it has a population of 113,497 people. It is mostly situated on the Santa Ana Isthmus within the eastern outskirts of the Novo-Arkhangelsk city limits.</p>",
+    "facts": [
+      { "label": "Official name", "value": "Autonomous District of Delgato" },
+      { "label": "Type", "value": "District of Novo-Arkhangelsk" },
+      { "label": "Population", "value": "113,497 (2021 census)" },
+      { "label": "Location", "value": "Santa Ana Isthmus, eastern outskirts of Novo-Arkhangelsk" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>The first reported settlers in Delgato were groups of immigrants from the Philippines in the mid-1700s that coincided with the later waves of diverse peoples that lived in Athens. It began as a small fishing settlement, and was frequently hit by natural calamities. The most infamous disaster in recent history was the 4 August 1857 Delgato Sea earthquake, which nearly wiped out the village. However, further waves of migration quickly grew Delgato's population, numbering to around 4,566 people during its incorporation on February 16, 1896.</p><p>Delgato experienced an economic boom under its first mayor, Leonardio Sunda, as characterized by the construction of eclectic buildings in its town center and a speedy decrease in its poverty rate. It quickly gained a reputation as the fishing capital of Athens, with over 75% of the nation's aquatic resource exports in 1915 originating from Delgato.</p><p>This sustained economic growth continued until the Troubles, as a frustrated Delgatoan labor sector contributed to intense unrest within the region. This era saw several Delgato mayors attacked and/or killed.</p><p>As an independent locality, Delgato saw relative peace after the creation of the Federation, although locals noted the looming threat of a new capital city in the region overtaking them economically and influentially. This, along with 'red fear' sentiment as a fallout from the Troubles, played a part in the instigation of the Delgato troubles, which took place from 1984 until 1987. This ended with Delgato being annexed by Novo-Arkhangelsk on January 9, 1988, cementing its status as a district of the co-capital.</p><p>With its defense infrastructure having been virtually obliterated, it turned over all defense processes to the Novo-Arkhangelsk government, and its humanist rehabilitation period in the early 90s focused on utility revitalization and cityscape restoration. In addition, Delgato saw massive social reforms, being one of the earliest regions to institutionalize marriage equality, and having a robust family planning sector.</p><p>Despite the end to the conflict, there has been a substantial support for an independent Delgato, with several legislative moves having been made, most notably the <em>Delgato Laya Bill</em> of 2014, although none have passed.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Delgato"
+  },
+  "Kitty Hawk": {
+    "title": "Kitty Hawk",
+    "aliases": [],
+    "lead": "<p><strong>Kitty Hawk</strong> is the county seat of <a href=\"https://athensmc.fandom.com/wiki/Lake_County\" target=\"_blank\" rel=\"noopener noreferrer\">Lake County</a> in <a href=\"https://athensmc.fandom.com/wiki/Athens_Federation\" target=\"_blank\" rel=\"noopener noreferrer\">Athens</a>, with a population of 21,927 people as of the 2020 census. It is located west of <a href=\"https://athensmc.fandom.com/wiki/Laketon\" target=\"_blank\" rel=\"noopener noreferrer\">Laketon</a>, south-southwest of <a href=\"https://athensmc.fandom.com/wiki/Saint_Michael\" target=\"_blank\" rel=\"noopener noreferrer\">Saint Michael</a>, and directly south of the <a href=\"https://athensmc.fandom.com/wiki/Milton_County_Uranium_Mine\" target=\"_blank\" rel=\"noopener noreferrer\">Milton County Uranium Mine</a>.</p>",
+    "facts": [
+      { "label": "Type", "value": "County seat of Lake County" },
+      { "label": "Population", "value": "21,927 (2020 census)" },
+      { "label": "Location", "value": "West of Laketon, south-southwest of Saint Michael" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Kitty_Hawk"
+  },
+  "Lindenwood": {
+    "title": "Lindenwood",
+    "aliases": [],
+    "lead": "<p><strong>Lindenwood</strong> is a city in <a href=\"https://athensmc.fandom.com/wiki/Louis_County\" target=\"_blank\" rel=\"noopener noreferrer\">Louis County</a>, located in the northeastern Athens Federation. It is the most populous community in the county, as well as the county seat. Lindenwood is considered to be an exurb of <a href=\"https://athensmc.fandom.com/wiki/Fernost\" target=\"_blank\" rel=\"noopener noreferrer\">Fernost</a>. The city is located near the interchange between Interstates 18 and 20. As of 2023, the city had an estimated population of 63,017, and the city currently has two representatives in the <a href=\"https://athensmc.fandom.com/wiki/People%27s_Congress\" target=\"_blank\" rel=\"noopener noreferrer\">People's Congress</a>.</p>",
+    "facts": [
+      { "label": "Type", "value": "City; county seat of Louis County" },
+      { "label": "Region", "value": "Northeastern Athens Federation" },
+      { "label": "Population", "value": "63,017 (2023 estimate)" },
+      { "label": "Near", "value": "Interstate 18 / Interstate 20 interchange" },
+      { "label": "Representation", "value": "Two representatives in the People's Congress" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Lindenwood"
+  },
+  "Little Tucson": {
+    "title": "Little Tucson",
+    "aliases": [],
+    "lead": "<p><strong>Little Tucson</strong> is a city located north-northeast of the city of <a href=\"https://athensmc.fandom.com/wiki/Novo-Arkhangelsk\" target=\"_blank\" rel=\"noopener noreferrer\">Novo-Arkhangelsk</a> and is a part of the Novo-Arkhangelsk metropolitan area. It is the county seat of <a href=\"https://athensmc.fandom.com/wiki/Arizona_County\" target=\"_blank\" rel=\"noopener noreferrer\">Arizona County</a>. As of the 2020 Census, Little Tucson has a population of 50,295. However, the city has had a population boom since then. Little Tucson is famous for the Cactus Tower, which is about 88 m tall and is the tallest building in the city.</p>",
+    "facts": [
+      { "label": "Type", "value": "City; county seat of Arizona County" },
+      { "label": "Location", "value": "North-northeast of Novo-Arkhangelsk" },
+      { "label": "Population", "value": "50,295 (2020 Census), grown since" },
+      { "label": "Landmark", "value": "Cactus Tower, about 88 m tall" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Little_Tucson"
+  },
+  "Miltonton": {
+    "title": "Miltonton",
+    "aliases": [],
+    "lead": "<p><strong>Miltonton</strong> is the county seat of <a href=\"https://athensmc.fandom.com/wiki/Milton_County\" target=\"_blank\" rel=\"noopener noreferrer\">Milton County</a>, and is located to the southwest of the city of <a href=\"https://athensmc.fandom.com/wiki/Athens_%28City%29\" target=\"_blank\" rel=\"noopener noreferrer\">Athens</a>. It is a mainly rural city with a population of 10,774 in the <a href=\"https://athensmc.fandom.com/wiki/Census_2015\" target=\"_blank\" rel=\"noopener noreferrer\">2015 census</a>. Miltonton is the home of 1 soccer stadium and 1 baseball stadium.</p>",
+    "facts": [
+      { "label": "Type", "value": "City; county seat of Milton County" },
+      { "label": "Location", "value": "Southwest of Athens" },
+      { "label": "Population", "value": "10,774 (2015 census)" },
+      { "label": "Notable", "value": "One soccer stadium and one baseball stadium" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Miltonton"
+  },
+  "Novo-Arkhangelsk": {
+    "title": "Novo-Arkhangelsk",
+    "aliases": ["Ново-Архангельск"],
+    "lead": "<p><strong>Novo-Arkhangelsk</strong> (Russian: <em>Ново-Архангельск</em>) is the co-capital and second-largest city within the <a href=\"https://athensmc.fandom.com/wiki/Athens_Federation\" target=\"_blank\" rel=\"noopener noreferrer\">Athens Federation</a>, and is located approximately 5 kilometers south of Athens. Currently, the city is split up into various districts: <em>Pilaite</em> (mostly complete), <em>Vilnius</em> (in construction), <em>Norilsk</em> (not started), <em>Tallinn</em> (also not started), <em>Krasnoyarsk</em> (still not started), <em>Niveli</em> (complete), and <em>Delgato</em> (autonomous district; in progress). The city is also home to the Novo-Arkhangelsk TV Tower, which remains one of the tallest buildings in the entire Athens server.</p>",
+    "facts": [
+      { "label": "Status", "value": "Co-capital and second-largest city of the Athens Federation" },
+      { "label": "Location", "value": "Approximately 5 km south of Athens" },
+      { "label": "Landmark", "value": "Novo-Arkhangelsk TV Tower, one of the tallest buildings on the server" },
+      { "label": "Districts", "value": "Pilaite, Vilnius, Norilsk, Tallinn, Krasnoyarsk, Niveli, Delgato" }
+    ],
+    "sections": [
+      {
+        "heading": "History (non-canon)",
+        "html": "<p>The city had originated as an unorganized test project only 1 mile south of Athens, which was eventually blown up by MH. After the original NA had been destroyed, a new city was founded only days later much further south and with a much more organized structure.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Novo-Arkhangelsk"
+  },
+  "Nowhere": {
+    "title": "Nowhere",
+    "aliases": ["New Strasbourg"],
+    "lead": "<p><strong>Nowhere</strong>, formerly called <strong>New Strasbourg</strong>, is a town located roughly to the north of the Athens-Nowhere International Airport and to the east of <a href=\"https://athensmc.fandom.com/wiki/Athens_Federation\" target=\"_blank\" rel=\"noopener noreferrer\">Athens</a>. As of the 2020 census, Nowhere had a population of 30,681, an increase from the 20,204 it had in the 2015 census. Nowhere features a variety of buildings, including a community pool, convenience store, fire station, a Never Eat Here and a garbage disposal.</p>",
+    "facts": [
+      { "label": "Former name", "value": "New Strasbourg" },
+      { "label": "Type", "value": "Town" },
+      { "label": "Population", "value": "30,681 (2020 census)" },
+      { "label": "2015 census", "value": "20,204" },
+      { "label": "Location", "value": "North of Athens-Nowhere International Airport, east of Athens" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>Around 1453, settlers affiliated to Arthur-Jacques Blanc, captain of the RMS Atlantic Breeze, established a settlement on the island known as <em>Athens</em> (modern-day <a href=\"https://athensmc.fandom.com/wiki/Arthurburg\" target=\"_blank\" rel=\"noopener noreferrer\">Arthurburg</a>), and expanded through surrounding land, conquering what later became modern-day Nowhere.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Nowhere"
+  },
+  "Pigville": {
+    "title": "Pigville",
+    "aliases": [],
+    "lead": "<p><strong>Pigville</strong> is a resort town located in western Dream County, along the southeast coast of Lake Technoblade. It is the largest town and county seat of Dream County. It is part of the Pigville-Swineton-Golon-Colon micropolitan population area.</p>",
+    "facts": [
+      { "label": "Type", "value": "Resort town; county seat of Dream County" },
+      { "label": "Location", "value": "Western Dream County, southeast coast of Lake Technoblade" },
+      { "label": "Metro area", "value": "Pigville-Swineton-Golon-Colon micropolitan area" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>As the Athenians moved eastward in the 1800s, Unitary Athens annexed several territories that had not previously had permanent population. However, the Alvin Mountains posed a significant challenge to development. A group of pig farmers decided to settle in modern-day Pigville in 1873, in a relatively flat area near the large lake known as Lake Technoblade today. The hilly region eventually became a.</p><p>Two distinct settlements developed - one near the lake and one farther east in a valley. The settlement near the lake had an economy heavily based on pig farming and fishing, while the eastern settlement had an economy heavily based on logging and coal mining.</p><p>In 1970 after the foundation of the Athens Federation, the eastern, impoverished part of Pigville was granted its independence from the Town of Pigville, and was renamed <strong>Swineton</strong>, whilst losing its status as an incorporated community. Lacking a county-level government, Pigville no longer was able to perform road maintenance for Swineton, and the unincorporated community has struggled. After the Pigville-Swineton split, the western portion, Pigville, saw a rapid rise in tourism in the 1980s due to the town's presence in the MCYT community. Pigville's population increased by more than 300 percent from 1980 to 2010. Pigville began to transition from a historically working-class economy to an up-and-coming, tourism-based economy.</p>"
+      },
+      {
+        "heading": "Politics",
+        "html": "<p>Pigville, for much of its early history in Unitary Athens, supported the Athens Liberal Party. After the decline of the ALP, working-class voters for the Athens Socialist Party became a strong force in the town. The ASP controlled Pigville's mayor seat from 1953 to 1987, with the ASP winning as much as 76% of the vote in 1969. In 1987, the town briefly voted for the Athens Conservative Party in the mayor election, before the ASP regained control of the mayor position in 1991. Pigville retained two ASP senators consistently every year from 1957 to 1999. In 2007, the town took a sharp shift rightward, as the Athens Conservative Party won by more than 12 points. The ACP's dominance continued for the next decade. In the last few years, however, the ASP has been able to regain some support, likely a result of the town's changing economy from working-class to tourism. Svetlana Ferrarat got 44.7% of the vote in the 2021 Athens Federation presidential election runoff, the greatest share of the vote for an ASP presidential candidate in the town since 2003.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Pigville"
+  },
+  "Pripyat": {
+    "title": "Pripyat",
+    "aliases": ["District of Pripyat"],
+    "lead": "<p><strong>Pripyat</strong>, officially named the <strong>District of Pripyat</strong>, is an Athens city-district located northeast of <a href=\"https://athensmc.fandom.com/wiki/Athens_%28City%29\" target=\"_blank\" rel=\"noopener noreferrer\">Athens</a>, north of <a href=\"https://athensmc.fandom.com/wiki/Trevorville\" target=\"_blank\" rel=\"noopener noreferrer\">Trevorville</a>, and east of <a href=\"https://athensmc.fandom.com/wiki/Cherkasy\" target=\"_blank\" rel=\"noopener noreferrer\">Cherkasy</a>. The city was founded sometime in April 2018, and has continued to grow since then. Some of the city's features include the Pripyat TV tower, the Pripyat Arena, and various commieblocks and skyscrapers carefully built throughout the city. Pripyat is at present the second-largest Athenian city-district, only behind Athens in its human development.</p>",
+    "facts": [
+      { "label": "Official name", "value": "District of Pripyat" },
+      { "label": "Type", "value": "Athens city-district" },
+      { "label": "Location", "value": "Northeast of Athens, north of Trevorville, east of Cherkasy" },
+      { "label": "Founded", "value": "April 2018" },
+      { "label": "Landmarks", "value": "Pripyat TV tower, Pripyat Arena" },
+      { "label": "Ranking", "value": "Second-largest Athenian city-district by human development" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Pripyat"
+  },
+  "Saint Michael": {
+    "title": "Saint Michael",
+    "aliases": ["St. Michael"],
+    "lead": "<p><strong>Saint Michael</strong> (abbreviated as <strong>St. Michael</strong>) is a city in <a href=\"https://athensmc.fandom.com/wiki/Milton_County\" target=\"_blank\" rel=\"noopener noreferrer\">Milton County</a> located to the south of Miltonton. It is currently a rapidly growing city as new buildings are being made. This town features tall apartment buildings, houses, a gas station, a Starbucks, a police department, a Target, and an In-N-Out.</p>",
+    "facts": [
+      { "label": "Also known as", "value": "St. Michael" },
+      { "label": "Type", "value": "City in Milton County" },
+      { "label": "Location", "value": "South of Miltonton" },
+      { "label": "Notable", "value": "Rapid growth; apartment buildings, Starbucks, Target, In-N-Out" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Saint_Michael"
+  },
+  "Skyscraper Row": {
+    "title": "Skyscraper Row",
+    "aliases": ["Skyscraper Row Historic District"],
+    "lead": "<p><em>Skyscraper Row</em> is the main hub of Athens, featuring many skyscrapers and entertainment facilities, such as a mall, multiple swimming pools, and several parks. There is also a map of the city located near Hype's house, but is frequently damaged due to constant exposure to the elements.</p>",
+    "facts": [
+      { "label": "Type", "value": "Main hub of Athens" },
+      { "label": "Features", "value": "Skyscrapers, a mall, multiple swimming pools, several parks" },
+      { "label": "Curiosity", "value": "City map near Hype's house, often weather-damaged" }
+    ],
+    "sections": [],
+    "source": "https://athensmc.fandom.com/wiki/Skyscraper_Row"
+  },
+  "Trevorville": {
+    "title": "Trevorville",
+    "aliases": [],
+    "lead": "<p><strong>Trevorville</strong> is a suburban city located east of downtown Athens, in central <a href=\"https://athensmc.fandom.com/wiki/Athens_County\" target=\"_blank\" rel=\"noopener noreferrer\">Athens County</a>. As of the 2015 census, Trevorville had a population of 298,174. Trevorville features several fast food restaurants as well as the <a href=\"https://athensmc.fandom.com/wiki/Athens_Aquarium\" target=\"_blank\" rel=\"noopener noreferrer\">Athens Aquarium</a>.</p>",
+    "facts": [
+      { "label": "Type", "value": "Suburban city in central Athens County" },
+      { "label": "Location", "value": "East of downtown Athens" },
+      { "label": "Population", "value": "298,174 (2015 census)" },
+      { "label": "Notable", "value": "Athens Aquarium, several fast food restaurants" }
+    ],
+    "sections": [
+      {
+        "heading": "History",
+        "html": "<p>Trevorville was built on the former site of an ancient abandoned village. Originally a township of Athens, Trevorville eventually became its own city.</p>"
+      }
+    ],
+    "source": "https://athensmc.fandom.com/wiki/Trevorville"
+  }
+}

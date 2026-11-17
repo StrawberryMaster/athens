@@ -31,7 +31,6 @@ html, body {
   height: 100vh;
 }
 
-/* Header */
 .atlas-header {
   height: 56px;
   padding: 0 16px;
@@ -170,7 +169,6 @@ html, body {
   color: var(--amber-active);
 }
 
-/* Main Workspace */
 .atlas-main {
   flex: 1;
   display: flex;
@@ -302,7 +300,6 @@ html, body {
   color: #5a3100;
 }
 
-/* Map */
 .map-stage {
   flex: 1;
   min-width: 0;
@@ -314,7 +311,6 @@ html, body {
   background: #141a22;
 }
 
-/* Plex Blue Utility Panel (Clock + Telemetry + Inspector) */
 .plex-utility {
   width: 230px;
   padding: 10px;
@@ -408,8 +404,80 @@ html, body {
   word-break: break-word;
 }
 .inspector-body a { color: #ffe3a8; }
+.inspector-desc { margin-top: 6px; }
+.inspector-desc p { margin: 0; }
 
-/* Downloaded Dynmap Marker Icon Wrapper */
+.wiki-article {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+.wiki-article-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.wiki-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #cfe2ff;
+}
+.wiki-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.wiki-toggle:hover { background: rgba(255, 255, 255, 0.24); }
+.wiki-chevron { font-size: 8px; transition: transform 0.16s ease; }
+.wiki-toggle[aria-expanded="true"] .wiki-chevron { transform: rotate(180deg); }
+.wiki-lead, .wiki-body p { font-size: 11px; line-height: 1.5; }
+.wiki-lead p, .wiki-body p { margin: 0 0 6px; }
+.wiki-lead strong { color: #fff4d6; }
+.wiki-lead sup { color: #ffe3a8; cursor: help; }
+.wiki-body { margin-top: 8px; }
+.wiki-facts {
+  margin: 0 0 8px;
+  padding: 6px 7px;
+  background: rgba(10, 30, 60, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+.wiki-fact + .wiki-fact {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.wiki-fact dt {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #bcd6ff;
+}
+.wiki-fact dd { margin: 1px 0 0; font-size: 11px; color: #fff; }
+.wiki-section-head {
+  margin: 8px 0 4px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 10.5px;
+  color: #ffe3a8;
+}
+.wiki-notes { margin: 6px 0 0; padding-left: 16px; font-size: 10px; color: #d6e6ff; }
+.wiki-credit { margin-top: 7px; font-size: 9.5px; color: #cfe2ff; }
+.wiki-credit a { color: #ffe3a8; }
+
 .dynmap-marker-wrap {
   display: flex;
   flex-direction: column;
@@ -446,7 +514,6 @@ html, body {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
 }
 
-/* Extracted map labels and road shields */
 .atlas-label-icon {
   background: transparent;
   border: none;
@@ -514,7 +581,6 @@ html, body {
 }
 .city-hover.athens { color: #ffe23d; }
 
-/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
