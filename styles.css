@@ -55,15 +55,18 @@ html, body {
 .brand-orb {
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 5%;
   display: grid;
   place-items: center;
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  background: radial-gradient(circle at 35% 28%, #9bd5ff 0%, #3d84d6 55%, #194885 100%);
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.45);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.brand-orb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand-group h1 {
@@ -90,7 +93,7 @@ html, body {
   align-items: center;
   background: #ffffff;
   border: 1px solid #353b45;
-  border-radius: 16px;
+  border-radius: 5px;
   padding: 3px 10px;
   margin-right: 4px;
 }
@@ -117,6 +120,7 @@ html, body {
   color: #fff;
   font-family: var(--font-ui);
   font-size: 11.5px;
+  line-height: 16px;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -210,7 +214,7 @@ html, body {
 .head-badge {
   background: rgba(255, 255, 255, 0.24);
   padding: 1px 7px;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 10.5px;
 }
 

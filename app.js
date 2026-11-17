@@ -66,6 +66,11 @@
     }
   }
 
+  function setActiveLayerLabel(text) {
+    const el = document.getElementById("active-layer-label");
+    if (el) el.textContent = text;
+  }
+
   // startup fetch
   const [config, chunksMeta, extractedMapData, fetchedPlaces] = await Promise.all([
     loadJSON("data/config.json", null),
@@ -88,10 +93,11 @@
 
   const metaKeys = Object.keys(state.chunksMeta || {});
   if (!state.config || !metaKeys.length) {
-    document.getElementById("active-layer-label").textContent =
+    setActiveLayerLabel(
       window.location.protocol === "file:"
         ? "Serve this folder over HTTP to load map data"
-        : "Run download_dynmap.py first";
+        : "Run download_dynmap.py first"
+    );
     return;
   }
 
@@ -397,8 +403,9 @@
       errorTileUrl: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
     }).addTo(map);
 
-    document.getElementById("active-layer-label").textContent =
-      `${state.world.title || state.world.name} • ${state.mapCfg.title || state.mapCfg.name}`;
+    setActiveLayerLabel(
+      `${state.world.title || state.world.name} • ${state.mapCfg.title || state.mapCfg.name}`
+    );
 
     if (resetCenter) {
       const spawn = findSpawnMarker();
