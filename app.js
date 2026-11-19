@@ -1,5 +1,7 @@
 (async function () {
   const DRAFT_KEY = "athens_places_draft_v1";
+  const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const MOBILE_MQ = window.matchMedia("(max-width: 820px)");
 
   const state = {
     config: null,
@@ -311,6 +313,30 @@
   const extractedCanvas = L.canvas({ pane: "extractedMapPane", padding: 0.5, tolerance: 6 });
   const dynmapCanvas = L.canvas({ padding: 0.5, tolerance: 6 });
   state.measureLayer.addTo(map);
+
+  // panel switching
+  const atlasMain = document.getElementById("atlas-main");
+  const utilityEl = document.getElementById("plex-utility");
+  const utilityBtn = document.getElementById("btn-toggle-utility");
+  const mobilePanelButtons = [...document.querySelectorAll(".mobile-panel-btn")];
+
+  function refreshMapSize() {
+    requestAnimationFrame(() => map.invalidateSize());
+    setTimeout(() => map.invalidateSize(), 120);
+  }
+
+  function showMobilePanel(panel) {
+    if (!MOBILE_MQ.matches) return;
+    atlasMain.dataset.activePanel = panel;
+    for (const btn of mobilePanelButtons) {
+      const active = btn.dataset.panel === panel;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    }
+    utilityBtn.setAttribute("aria-pressed", String(panel === "info"));
+    if (panel === "info") utilityEl.classList.remove("collapsed");
+    if (panel === "map") refreshMapSize();
+  }
 
   // viewport-culled LayerGroup wrapper for large marker/label/sign collections
   function createCulledGroup(entries) {
@@ -895,12 +921,17 @@
       if (item.groupLabel) metaParts.push(escapeHtml(item.groupLabel));
       metaParts.push(`${item.x}, ${item.z}`);
 
-      li.innerHTML = `${visual}
-        <div>
-          <div class="place-title">${escapeHtml(item.name)}</div>
-          <div class="place-meta">${metaParts.join(" • ")}</div>
-        </div>`;
-      li.onclick = () => {
+      li.innerHTML = `<button type="button" class="place-entry">
+        ${visual}
+        <span class="place-text">
+          <span class="place-title">${escapeHtml(item.name)}</span>
+          <span class="place-meta">${metaParts.join(" • ")}</span>
+        </span>
+      </button>`;
+      const entry = li.querySelector(".place-entry");
+      entry.setAttribute("aria-label", `${item.name}, ${metaParts.join(", ")}. Show on map.`);
+      entry.onclick = () => {
+        showMobilePanel("map");
         item.focus();
         inspectItem(item);
       };
@@ -944,7 +975,7 @@
     const activeLi = state.liByUid.get(item.uid);
     if (activeLi) {
       activeLi.classList.add("selected");
-      activeLi.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      activeLi.scrollIntoView({ block: "nearest", behavior: REDUCED_MOTION ? "auto" : "smooth" });
     }
 
     if (item.safeDesc == null) {
@@ -1046,6 +1077,7 @@
   // pin editor
   const iconPickerEl = document.getElementById("pin-icon-picker");
   const pinIconInput = document.getElementById("pin-icon");
+  const iconButtons = [];
   for (const icon of PIN_ICONS) {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -1057,20 +1089,41 @@
     btn.innerHTML = `<img src="${iconUrlFor(icon.id)}" alt="" />`;
     btn.onclick = () => setPinIcon(icon.id);
     iconPickerEl.appendChild(btn);
+    iconButtons.push(btn);
   }
   setPinIcon(DEFAULT_PIN_ICON);
 
-  function setPinIcon(name) {
+  iconPickerEl.addEventListener("keydown", (e) => {
+    const idx = iconButtons.indexOf(document.activeElement);
+    if (idx < 0) return;
+    let next = -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (idx + 1) % iconButtons.length;
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (idx - 1 + iconButtons.length) % iconButtons.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = iconButtons.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    setPinIcon(PIN_ICONS[next].id, true);
+  });
+
+  function setPinIcon(name, focus = false) {
     const selected = PIN_ICON_IDS.has(name) ? name : DEFAULT_PIN_ICON;
     pinIconInput.value = selected;
-    for (const btn of iconPickerEl.querySelectorAll(".icon-choice")) {
+    for (const btn of iconButtons) {
       const active = btn.dataset.icon === selected;
       btn.classList.toggle("selected", active);
       btn.setAttribute("aria-checked", active ? "true" : "false");
+      btn.tabIndex = active ? 0 : -1;
     }
+    if (focus) iconButtons.find(btn => btn.dataset.icon === selected)?.focus();
   }
 
+  const pinModal = document.getElementById("pin-modal");
+  const atlasShell = document.getElementById("atlas-shell");
+  let focusBeforeModal = null;
+
   function openPinModal(pin) {
+    focusBeforeModal = document.activeElement;
     document.getElementById("pin-modal-title").textContent = pin.id ? "Edit Custom pin" : "Add custom pin";
     document.getElementById("pin-id").value = pin.id || "";
     document.getElementById("pin-name").value = pin.name || "";
@@ -1079,7 +1132,9 @@
     document.getElementById("pin-z").value = pin.z ?? 0;
     document.getElementById("pin-desc").value = pin.description || "";
     document.getElementById("btn-delete-pin").classList.toggle("hidden", !pin.id);
-    document.getElementById("pin-modal").classList.remove("hidden");
+    pinModal.classList.remove("hidden");
+    atlasShell.inert = true;
+    document.querySelector(".skip-link").inert = true;
     document.getElementById("pin-name").focus();
   }
 
@@ -1105,7 +1160,7 @@
       state.places.push(item);
     }
     persistCustomDraft();
-    document.getElementById("pin-modal").classList.add("hidden");
+    closePinModal();
     rebuildCustomLayerOnly();
   };
 
@@ -1113,32 +1168,66 @@
     const id = document.getElementById("pin-id").value;
     state.places = state.places.filter(p => p.id !== id);
     persistCustomDraft();
-    document.getElementById("pin-modal").classList.add("hidden");
+    closePinModal();
     rebuildCustomLayerOnly();
   };
 
   function closePinModal() {
-    document.getElementById("pin-modal").classList.add("hidden");
+    pinModal.classList.add("hidden");
+    atlasShell.inert = false;
+    document.querySelector(".skip-link").inert = false;
+    if (focusBeforeModal && document.contains(focusBeforeModal)) focusBeforeModal.focus();
+    focusBeforeModal = null;
   }
+
+  // keep tab inside the dialog until it is dismissed
+  pinModal.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusables = [...pinModal.querySelectorAll(
+      'button:not([disabled]), input:not([type="hidden"]):not([disabled]), textarea:not([disabled]), [href]'
+    )].filter(el => el.offsetParent !== null);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
   document.getElementById("btn-close-pin").onclick = closePinModal;
   document.getElementById("btn-cancel-pin").onclick = closePinModal;
 
   // header controls
-  document.getElementById("btn-reset-view").onclick = () => loadMapLayer(true);
-  document.getElementById("btn-map-switch").onclick = (e) => {
-    e.stopPropagation();
-    document.getElementById("map-style-menu").classList.toggle("open");
+  document.getElementById("btn-reset-view").onclick = () => {
+    showMobilePanel("map");
+    loadMapLayer(true);
   };
-  document.addEventListener("click", () => document.getElementById("map-style-menu").classList.remove("open"));
+  const mapStyleMenu = document.getElementById("map-style-menu");
+  const mapSwitchBtn = document.getElementById("btn-map-switch");
+  mapSwitchBtn.onclick = (e) => {
+    e.stopPropagation();
+    const open = mapStyleMenu.classList.toggle("open");
+    mapSwitchBtn.setAttribute("aria-expanded", String(open));
+  };
+  document.addEventListener("click", () => {
+    mapStyleMenu.classList.remove("open");
+    mapSwitchBtn.setAttribute("aria-expanded", "false");
+  });
 
   function setEditMode(on) {
     state.editMode = on;
     document.getElementById("btn-edit-mode").classList.toggle("active", on);
+    document.getElementById("btn-edit-mode").setAttribute("aria-pressed", String(on));
     document.getElementById("edit-banner").classList.toggle("hidden", !on);
   }
   function setMeasureMode(on) {
     state.measuring = on;
     document.getElementById("btn-measure").classList.toggle("active", on);
+    document.getElementById("btn-measure").setAttribute("aria-pressed", String(on));
     if (!on) {
       state.measurePoints = [];
       state.measureLayer.clearLayers();
@@ -1174,10 +1263,34 @@
     }
   };
 
-  document.getElementById("btn-toggle-utility").onclick = () => {
-    document.getElementById("plex-utility").classList.toggle("collapsed");
-    setTimeout(() => map.invalidateSize(), 150);
+  document.getElementById("btn-import-json").onclick = () => document.getElementById("import-json-input").click();
+
+  function syncUtilityButton() {
+    const active = MOBILE_MQ.matches
+      ? atlasMain.dataset.activePanel === "info"
+      : !utilityEl.classList.contains("collapsed");
+    utilityBtn.setAttribute("aria-pressed", String(active));
+  }
+
+  utilityBtn.onclick = () => {
+    if (MOBILE_MQ.matches) {
+      showMobilePanel(atlasMain.dataset.activePanel === "info" ? "map" : "info");
+    } else {
+      utilityEl.classList.toggle("collapsed");
+      syncUtilityButton();
+      setTimeout(() => map.invalidateSize(), 150);
+    }
   };
+
+  for (const btn of mobilePanelButtons) {
+    btn.onclick = () => showMobilePanel(btn.dataset.panel);
+  }
+  MOBILE_MQ.addEventListener("change", () => {
+    utilityEl.classList.remove("collapsed");
+    syncUtilityButton();
+    refreshMapSize();
+  });
+  syncUtilityButton();
 
   // clock card collapse
   const clockCard = document.getElementById("clock-card");
@@ -1264,7 +1377,8 @@
     hand((sec * Math.PI) / 30, r * 0.82, 1, "#3f70b5");
   }
   drawClock();
-  setInterval(drawClock, 1000);
+  setInterval(drawClock, REDUCED_MOTION ? 60000 : 1000);
 
   loadMapLayer(true);
+  refreshMapSize();
 })();
